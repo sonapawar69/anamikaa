@@ -455,3 +455,236 @@ class Child(Car, Bike):
 vehicle_obj = Child("Toyota", "Ninja", "Red")
 vehicle_obj.display()
 
+#SCIPY EXTS
+#Importing the fft and inverse fft functions from fftpackage
+from scipy.fftpack import fft,ifft
+import numpy as np
+#create an array with random n numbers
+x = np.array([1.0, 3.0, -2.0, 1.0])
+#Applying the fft function
+y = fft(x)
+print (y)
+#FFT is already in the workspace, using the same workspace to for inverse transform
+yinv = ifft(y)
+print(yinv)
+
+#Linear algebra question
+#importing the scipy and numpy packages
+from scipy import linalg
+import numpy as np
+#Declaring the numpy arrays
+a = np.array([[1, 1], [4, 9]])
+b = np.array([30, 150])
+#Passing the values to the solve function
+x = linalg.solve(a, b)
+#printing the result array
+print (x)
+
+#eigenvalues eigenvectors
+from scipy import linalg
+import numpy as np
+#Declaring the numpy array
+A = np.array([[1,2],[3,4]])
+#Passing the values to the eig function
+l, v = linalg.eig(A)
+#printing the result for eigen values
+print(l)
+#printing the result for eigen vectors
+print(v)
+
+#IMAGE PROCESSING EXPT
+import cv2
+from google.colab.patches import cv2_imshow
+im = cv2.imread('/content/veggie.jpeg')
+cv2_imshow(im)
+
+import cv2
+gray_image = cv2.cvtColor(im, cv2.COLOR_BGR2GRAY)
+cv2_imshow(gray_image)
+
+cv2.imwrite('veggiegray.jpg',gray_image)
+
+
+import cv2
+import matplotlib.pyplot as plt
+img_1=cv2.imread('veggiegray.jpg')
+img_2 = 255 - img_1
+plt.imshow(img_1)
+plt.title("Original Image")
+plt.show()
+plt.imshow(img_2)
+plt.title("Negative Image")
+plt.show()
+
+im = cv2.imread('veggiegray.jpg')
+cv2_imshow(im)
+y=cv2.blur(im, (13,13))
+cv2_imshow(y)
+
+
+cv2_imshow(im)
+Median_Blur = cv2.medianBlur(im,15)
+cv2_imshow(Median_Blur)
+
+import cv2
+import numpy as np
+from matplotlib import pyplot as plt
+x=cv2.imread('/content/horse.jpeg')
+Median_Blur = cv2.medianBlur(x,7)
+plt.subplot(121),plt.imshow(x)
+plt.title("Noisy Image")
+plt.subplot(122),plt.imshow(Median_Blur,cmap="gray")
+plt.title('Median filtered image')
+
+import cv2
+img = cv2.imread('/content/veggiegray.jpg')
+cv2_imshow(img)
+edges = cv2.Canny(img,50,100)
+cv2_imshow(edges)
+
+
+from matplotlib import pyplot as plt
+plt.figure(figsize=(16,16))
+plt.subplot(121)
+plt.imshow(img)
+plt.title('Original Image')
+plt.subplot(122)
+plt.imshow(edges)
+plt.title("Edge Image")
+plt.show()
+
+
+  import cv2
+from matplotlib import pyplot as plt
+from google.colab.patches import cv2
+img = cv2.imread('/content/man')
+cv2_imshow(img)
+plt.hist(img.ravel(),bins = 256, range = [0,256])
+plt.show
+
+import cv2
+import numpy as np
+img = cv2.imread('/content/IMG_0586.jpeg')
+kernel = np.ones((5,5),np.uint8)
+erosion = cv2.erode(img, kernel, iterations=2)
+cv2_imshow(img)
+cv2_imshow(erosion)
+
+img = cv2.imread('/content/man')
+cv2_imshow(img)
+img2 = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+img2 = cv2.equalizeHist(img2)
+cv2_imshow(img2)
+
+#MACHINE LEARNING EXPT
+#LINEAR REGRESSION
+import numpy as np
+from sklearn.linear_model import LinearRegression
+from sklearn import linear_model
+import matplotlib.pyplot as plt
+
+features = [[2],[1],[5],[10]]
+#print(features)
+labels = [25, 11, 70, 158]
+plt.scatter(features, labels)
+
+clf = linear_model.LinearRegression()
+clf=clf.fit(features,labels)
+
+predicted = clf.predict([[9]])
+print(predicted)
+
+predicted = clf.predict(features)
+print(predicted)
+
+#To retrieve the intercept:
+print(clf.intercept_)
+#For retrieving the slope:
+print(clf.coef_)
+
+from sklearn import metrics
+ypredicted=clf.predict(features)
+rmse = metrics.mean_squared_error(labels, predicted)
+print(rmse)
+
+#SCATTER PLOT
+#Example1
+features = [[6],[2],[10],[4],[8]]
+#print(features)
+labels = [9, 11, 5, 8,7]
+
+import matplotlib.pyplot as plt
+plt.title('Scatter Plot')
+plt.scatter(features, labels)
+plt.xlabel('Independent variable')
+plt.ylabel('Dependent variable')
+plt.show()
+
+clf = linear_model.LinearRegression()
+clf=clf.fit(features,labels)
+
+predicted = clf.predict(features)
+print(predicted)
+
+#To retrieve the intercept:
+print(clf.intercept_)
+#For retrieving the slope:
+print(clf.coef_)
+
+from sklearn import metrics
+ypredicted=clf.predict(features)
+rmse = metrics.mean_squared_error(labels, ypredicted)
+print(rmse)
+
+#MULTIPLE REGRESSON
+import numpy as np
+from sklearn.linear_model import LinearRegression
+x = [[3, 8], [4,5], [5,7], [6,3], [2,1]]
+y = [-3.7,3.5,2.5,11.5,5.7]
+x, y = np.array(x), np.array(y)
+model = LinearRegression().fit(x, y)
+print('intercept:', model.intercept_)
+print('slope:', model.coef_)
+
+y_pred = model.predict(x)
+print('predicted response:', y_pred, sep='\n')
+
+x_new=[[3,5]]
+y_new = model.predict(x_new)
+print(y_new)
+
+import pandas
+df = pandas.DataFrame({'Actual': y,'Predicted': y_pred})
+df1 = df.head(5)
+print(df1)
+
+from sklearn import metrics
+ypredicted=model.predict(x)
+mse1 = metrics.mean_squared_error(y, y_pred)
+print(mse1)
+
+#LOGISTIC REGRESSION
+import matplotlib.pyplot as plt
+import numpy as np
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import classification_report, confusion_matrix
+
+x = np.arange(10).reshape(-1, 1)
+y = np.array([0, 0, 0, 0, 1, 1, 1, 1, 1, 1])
+
+print(x)
+print(y)
+
+model = LogisticRegression(solver='liblinear', random_state=0).fit(x, y)
+
+model.intercept_
+
+model.coef_
+
+model.predict_proba(x)
+
+model.predict(x)
+
+model.score(x, y)
+
+confusion_matrix(y, model.predict(x))
