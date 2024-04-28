@@ -1,0 +1,26 @@
+close all;
+clear all;
+t=0:0.01:20;
+T=8;
+fm=1/T;
+x=cos(2*pi*fm*t);
+fs1=10*fm;
+xn1=cos(2*pi*fs1*t);
+subplot(311)
+plot(t,x);
+xlabel('time in seconds');
+ylabel('x(t)');
+title('AF Signal');
+subplot(312)
+plot(t,xn1);
+xlabel('time in seconds');
+ylabel('x(t)');
+title('RF Signal');
+b=5;
+y=cos(2*pi*fs1*t+b*x);
+subplot(313)
+plot(t,y);
+xlabel('time in seconds');
+ylabel('x(t)');
+title('Frequency Modulation');
+
