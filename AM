@@ -1,0 +1,41 @@
+close all;
+clear all;
+t=0:0.01:20;
+T=0;
+fm=1/T;
+x=sin(2*pi*fm*t);
+fs1= 10*fm;
+xn1=sin(2*pi*fs1*t);
+subplot(321)
+plot(t,x);
+xlabel('x(t)');
+title('AF Signal');
+subplot(322)
+plot(t,xn1);
+xlabel('time in seconds');
+ylabel('x(t)');
+title('RF Signal');
+y=(x*xn1);
+subplot (323)
+plot (t,y);
+xlabel('time in seconds');
+ylabel('AM Amplitude')
+title('DSBSC signal');
+z=(xn1+(0.5*y0));
+subplot(324)
+plot(t,z);
+xlabel('time in seconds');
+ylabel('AM Amplitude')
+title('AM m<1 signal');
+z=(xn1+(0.99*y));
+subplot (325)
+plot(t,z);
+xlabel('time in seconds');
+ylabel('AM Amplitude')
+title('AM m<1 signal');
+z=(xn1+(1.5*y));
+subplot (326)
+plot(t,z);
+xlabel('time in seconds');
+ylabel('AM Amplitude')
+title('AM m>1 signal');
